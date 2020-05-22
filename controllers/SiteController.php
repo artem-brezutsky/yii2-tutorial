@@ -17,7 +17,16 @@ class SiteController extends Controller
     public function actionEntry()
     {
         $model = new EntryForm();
-        dd($model);
+
+        if ($model->load() && $model->validate()) {
+            // данные в $model удачно проверены
+
+            // делаем что-то полезное с $model ...
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else{
+            // либо страница отображается первый раз, либо есть ошибка в данных
+            return $this->render('entry', ['model' => $model]);
+        }
 
     }
 
