@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\EntryForm;
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -12,6 +14,13 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public function actionEntry()
+    {
+        $model = new EntryForm();
+        dd($model);
+
+    }
+
     /**
      * Say Hello Function
      * @param string $message
@@ -22,6 +31,7 @@ class SiteController extends Controller
 
         return $this->render('say', ['message' => $message]);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -30,17 +40,17 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only'  => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
+            'verbs'  => [
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -54,11 +64,11 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-            'error' => [
+            'error'   => [
                 'class' => 'yii\web\ErrorAction',
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
+                'class'           => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
